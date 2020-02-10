@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      JavaScript PizzaToGo
+
+      Author: M. Liliana Ignat
+      Date: 6/30/2017  
+
+      Filename: index.htm
+   -->
+   <meta charset="utf-8" />
+   <meta id="viewport" content="width=device-width, initial-scale=1.0">
+   <title>PizzaToGo</title>
+   <link rel="stylesheet" href="styles.css" />
+   <script src="modernizr.custom.65897.js"></script>
+
+</head>
+
+<body>
+   <header>
+      <h1>
+         PizzaToGo
+      </h1>
+   </header>
+
+   <article>
+      <h2>Pizza To Go Order Menu</h2>	
+      <form method="post" onsubmit="return checkPizza();">
+         <fieldset id="orderinfo">
+            <legend>Order Pizza Type</legend>
+            <fieldset id="pizzatypebox">
+               <legend>Type</legend>
+               <input type="radio" name="pizzaType" onclick="runningTotal();"/><span class="price">$10.70</span>
+               <label for="vegy">Vegetarian</label>
+               <input type="radio" name="pizzaType" onclick="runningTotal();"/><span class="price">$9.65</span>
+               <label for="meat">Meat Lover's Pizza</label>
+            </fieldset>
+            <fieldset id="toppingbox">
+               <legend>Additional Topping(s) ($1.07 Each)</legend>
+               <input type="checkbox" id="toppings" name="toppings" onclick="runningTotal();"/>
+               <label for="pepperoni">Pepperoni</label>
+               <input type="checkbox" id="toppings" name="toppings" onclick="runningTotal();"/>
+               <label for="sausage">Sausage</label>
+               <input type="checkbox" id="toppings" name="toppings" onclick="runningTotal();"/>
+               <label for="xcheese">Extra Cheese</label>
+			   <input type="checkbox" id="toppings" name="toppings" onclick="runningTotal();"/>
+               <label for="mushrooms">Mushrooms</label>
+			   <input type="checkbox" id="toppings" name="toppings" onclick="runningTotal();"/>
+               <label for="xcheese">Anchovies</label>
+			   <p><em>Total</em><br />
+               <textarea id="total" name="yourTotal" rows="1" cols="20" value="0" placeholder="Your check"></textarea><br /></p>
+			   <input type="submit" value="Submit Order" />
+			 </fieldset>
+         </fieldset>
+      </form>
+   </article>
+<script>
+function checkPizza() {  //checks to see if a pizza is selected
+	if (!(document.forms[0].pizzaType[0].checked) && !(document.forms[0].pizzaType[1].checked)) {	
+			window.alert("You must select a pizza to continue.");
+	} else {
+			pizzaType[0].style.outline = "";
+			pizzaType[1].style.outline = "";
+	}		
+}
+var total = 0;
+var vegy = 10.70;
+var meats = 9.65;
+var addOn = 1.07;
+function runningTotal() {
+ if(document.forms[0].pizzaType[0].checked) {
+        total = vegy;
+    }
+    else if(document.forms[0].pizzaType[1].checked){
+        total = meats;
+    }	
+	 for(var i = 0; i < 5; i++){
+        if (document.forms[0].toppings[i].checked)
+            total += addOn;
+			
+    }
+	document.forms[0].yourTotal.value = total.toFixed(2);
+}
+</script>
+</body>
+</html>
